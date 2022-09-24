@@ -1,0 +1,36 @@
+{
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+      "ecmaVersion": 2020,
+      "sourceType": "module",
+      "project": ["tsconfig.json"],
+      "ecmaFeatures": {
+        "jsx": true
+      }
+    },
+    "plugins": [
+      "@typescript-eslint",
+      "react-hooks",
+      "react"
+    ],
+    "extends": [
+      "plugin:react/recommended",
+      "plugin:@typescript-eslint/recommended",
+      "plugin:@typescript-eslint/recommended-requiring-type-checking",
+      "prettier"
+    ],
+    "rules": {
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "warn",
+      "react/prop-types": "warn",
+      "@typescript-eslint/no-unsafe-assignment": "off",
+      "no-console": "warn"
+    },
+    "settings": {
+      "react": {
+        "pragma": "React",
+        "version": "detect"
+      }
+    },
+    "ignorePatterns": ["./appconfig/**/*.js", "./webpack.config.ts"]
+  }

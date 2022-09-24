@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        "target": "ES2015",
+        "outDir": "./build",
+        "esModuleInterop": true,
+        "module": "commonjs",
+        "allowSyntheticDefaultImports": true,
+        "allowJs": true,
+        "useDefineForClassFields": true,
+        "jsx": "react",
+        "sourceMap": true,
+        "moduleResolution": "node",
+        "isolatedModules": true,
+        "typeRoots": ["node_modules/@types", "types/**/*"],
+        "baseUrl": ".",
+        "paths": {
+            "*": ["*"],
+        },
+    },
+    "include": ["src/**/*", "./webpack.config.ts", "appconfig/**/*", "types/**/*"],
+    "exclude": ["node_modules"],
+}

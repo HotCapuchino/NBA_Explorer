@@ -1,4 +1,4 @@
-import { AxiosInstance, AxiosRequestConfig } from 'axios';
+import { AxiosRequestConfig } from 'axios';
 import { GameModel } from '../models/Game';
 import { HTTPRequestService } from './Service';
 

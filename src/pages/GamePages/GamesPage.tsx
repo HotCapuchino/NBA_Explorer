@@ -1,14 +1,12 @@
 import React from 'react';
 import PageLayout from 'src/layout/PageLayout';
 
-
-const PlayersPage: React.FC = () => {
-
+const GamesPage: React.FC = () => {
     return (
         <PageLayout hasHeader={true}>
-            <div>PlayersPage</div>
+            GamesPage
         </PageLayout>
     );
 }
 
-export default PlayersPage;
+export default GamesPage;

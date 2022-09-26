@@ -6,22 +6,14 @@ export class HTTPRequestService {
 
 	constructor(config: AxiosRequestConfig) {
 		this.axiosInstance = axios.create(config);
-		// this.setInterceptors();
 	}
 
-	// private setInterceptors() {
-	// 	this.axiosInstance.interceptors.request.use(
-	// 		() => {},
-	// 		(err) => {}
-	// 	);
-	// }
-
-	protected requestParamsToString(args: { [x: string]: unknown }): string {
-		return reduce<{ [x: string]: unknown }, Array<string>>(
+	protected requestParamsToString(args: { [x: string]: string | number }): string {
+		return reduce<{ [x: string]: string | number }, Array<string>>(
 			args,
 			(acc, cur, key) => {
 				if (!isNil(cur)) {
-					acc.push(`${key}=${cur as string}`);
+					acc.push(`${key}=${String(cur)}`);
 				}
 				return acc;
 			},

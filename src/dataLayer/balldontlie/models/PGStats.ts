@@ -1,8 +1,4 @@
-export interface SeasonAveragesModel {
-	player_id: number;
-	games_played: number;
-	season: number;
-	// below stats are PG
+export interface PGStatsModel {
 	// minutes played
 	min: string;
 	// field goals made

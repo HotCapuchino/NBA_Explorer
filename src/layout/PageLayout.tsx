@@ -1,10 +1,9 @@
 import React from 'react';
-import Header from './Header';
+import Header from '../components/Header';
 
-interface PageLayoutProps {
+interface PageLayoutProps extends AbstractComponentProps {
     title?: React.ReactNode | React.ReactElement;
     hasHeader?: boolean;
-    children?: React.ReactNode;
 }
 
 const PageLayout: React.FC<PageLayoutProps> = (props) => {

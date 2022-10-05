@@ -4,22 +4,22 @@ import { isNil } from 'lodash';
 import { PlayerService } from './PlayerService';
 import { TeamService } from './TeamService';
 
-export class API {
+export class BallDontLieAPI {
 	playerService: PlayerService;
 	teamService: TeamService;
 	gameService: GameService;
 
-	private static api: API = null;
+	private static api: BallDontLieAPI = null;
 
-	static init(): API {
-		if (isNil(API.api)) {
-			const singletoneInstance = new API();
-			API.api = singletoneInstance;
+	static init(): BallDontLieAPI {
+		if (isNil(BallDontLieAPI.api)) {
+			const singletoneInstance = new BallDontLieAPI();
+			BallDontLieAPI.api = singletoneInstance;
 
 			return singletoneInstance;
 		}
 
-		return API.api;
+		return BallDontLieAPI.api;
 	}
 
 	private constructor() {

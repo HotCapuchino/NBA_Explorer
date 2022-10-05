@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 enum NotFoundPageErrorsEnum {
     Player = 'Requested player not found',
-    Team = 'Requested team not found',
+    Game = 'Requested game not found',
 }
 
 interface NotFoundPageProps {

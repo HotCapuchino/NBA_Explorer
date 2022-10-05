@@ -3,7 +3,7 @@ export const routes = {
 	players: {
 		index: '/players',
 		player: '/player/:id',
-		openPlayer: (playerId: number) => `player/${playerId}`,
+		openPlayer: (playerId: number) => `/player/${playerId}`,
 	},
 	teams: {
 		index: '/teams',

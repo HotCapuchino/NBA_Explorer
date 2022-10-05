@@ -24,7 +24,8 @@
       "react-hooks/exhaustive-deps": "warn",
       "react/prop-types": "warn",
       "@typescript-eslint/no-unsafe-assignment": "off",
-      "no-console": "warn"
+      "no-console": "warn",
+      "@typescript-eslint/no-namespace": "off"
     },
     "settings": {
       "react": {

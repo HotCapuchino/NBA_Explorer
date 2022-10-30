@@ -54,16 +54,17 @@ const config: Configuration = {
 					},
 					{
 						test: /\.svg$/,
-						use: [
-							'url-loader',
-							'babel-loader',
-							{
-								loader: '@svgr/webpack',
-								options: {
-									configFile: path.resolve(__dirname, 'appconfig', 'svgr', 'config.js'),
-								},
-							},
-						],
+						// use: [
+						// 	'url-loader',
+						// 	'babel-loader',
+						// 	{
+						// 		loader: '@svgr/webpack',
+						// 		options: {
+						// 			configFile: path.resolve(__dirname, 'appconfig', 'svgr', 'config.js'),
+						// 		},
+						// 	},
+						// ],
+						use: [{ loader: '@svgr/webpack', options: { svgo: false } }],
 					},
 					{
 						test: /\.svg$/,
@@ -80,6 +81,12 @@ const config: Configuration = {
 								loader: 'sass-loader',
 								options: {
 									sourceMap: true,
+								},
+							},
+							{
+								loader: 'style-resources-loader',
+								options: {
+									patterns: [path.resolve(__dirname, 'src/styles/palette.scss')],
 								},
 							},
 						],
@@ -135,11 +142,6 @@ const config: Configuration = {
 				warnings: false,
 			},
 		},
-		// open: {
-		// 	app: {
-		// 		name: 'google-chrome',
-		// 	},
-		// },
 		hot: true,
 	},
 	watch: true,

@@ -1,5 +1,5 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig } from 'axios';
-import { isNil, reduce } from 'lodash';
+import { isNil, isUndefined, reduce } from 'lodash';
 import moment from 'moment';
 import React from 'react';
 import NotificationSnackbar from 'src/components/NotificationSnackbar';
@@ -18,7 +18,7 @@ export class HTTPRequestService {
 				const concatenatedParams = reduce<RequestParams, Array<string>>(
 					params,
 					(acc, cur, key) => {
-						if (!isNil(cur)) {
+						if (!isNil(cur) && !isUndefined(cur)) {
 							if (Array.isArray(cur)) {
 								cur.forEach((val) => {
 									acc.push(`${key}=${moment.isMoment(val) ? formatDate(val) : String(val)}`);
@@ -41,7 +41,8 @@ export class HTTPRequestService {
 	private setInterceptors(): void {
 		this.axiosInstance.interceptors.response.use(
 			(response) => {
-                return response;
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+                return response.data;
 			},
 			(err: AxiosError) => {
 				this.catchError(err);

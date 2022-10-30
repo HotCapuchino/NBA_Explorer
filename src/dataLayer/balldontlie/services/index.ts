@@ -1,13 +1,13 @@
-import { GameService } from './GameService';
+import { TeamService, TeamServiceInterface } from './TeamService';
+import { GameService, GameServiceInterface } from './GameService';
 import { AxiosRequestConfig } from 'axios';
 import { isNil } from 'lodash';
-import { PlayerService } from './PlayerService';
-import { TeamService } from './TeamService';
+import { PlayerService, PlayerServiceInterface } from './PlayerService';
 
 export class BallDontLieAPI {
-	playerService: PlayerService;
-	teamService: TeamService;
-	gameService: GameService;
+	playerService: PlayerServiceInterface;
+	teamService: TeamServiceInterface;
+	gameService: GameServiceInterface;
 
 	private static api: BallDontLieAPI = null;
 

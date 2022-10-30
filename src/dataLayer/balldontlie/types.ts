@@ -28,6 +28,6 @@ export interface FetchPlayerStatsParams extends GamesParams {
 }
 
 export interface FetchPlayerSeasonAveragesParams {
-	'seasons[]': number;
+	season: number;
 	'player_ids[]': number[];
 }

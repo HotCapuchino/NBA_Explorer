@@ -10,11 +10,14 @@ export class PlayerService extends HTTPRequestService implements PlayerServiceIn
 		return this.fetchPaginatedData('/players', params, config);
 	}
 
-	findPlayer(id: number, config?: AxiosRequestConfig): Promise<BallDontLieResponseStructure<PlayerModel>> {
-		return this.axiosInstance.get('/players', { ...config, params: { id } });
+	findPlayer(id: number, config?: AxiosRequestConfig): Promise<PlayerModel> {
+		return this.axiosInstance.get(`/players/${id}`, config);
 	}
 
-	fetchPlayerSeasonAverages(params: Partial<FetchPlayerSeasonAveragesParams>, config?: AxiosRequestConfig): Promise<BallDontLieResponseStructure<PlayerSeasonAverageStatsModel>> {
+	fetchPlayerSeasonAverages(
+		params: Partial<FetchPlayerSeasonAveragesParams>,
+		config?: AxiosRequestConfig
+	): Promise<BallDontLieResponseStructure<PlayerSeasonAverageStatsModel[]>> {
 		return this.axiosInstance.get('/season_averages', { ...config, params });
 	}
 
@@ -26,12 +29,12 @@ export class PlayerService extends HTTPRequestService implements PlayerServiceIn
 export interface PlayerServiceInterface {
 	fetchPlayers: (params: Partial<FetchPlayersParams>, config?: AxiosRequestConfig) => Promise<BallDontLieResponseStructure<PlayerModel[]>>;
 
-	findPlayer(id: number, config?: AxiosRequestConfig): Promise<BallDontLieResponseStructure<PlayerModel>>;
+	findPlayer(id: number, config?: AxiosRequestConfig): Promise<PlayerModel>;
 
 	fetchPlayerSeasonAverages: (
 		params: Partial<FetchPlayerSeasonAveragesParams>,
 		config?: AxiosRequestConfig
-	) => Promise<BallDontLieResponseStructure<PlayerSeasonAverageStatsModel>>;
+	) => Promise<BallDontLieResponseStructure<PlayerSeasonAverageStatsModel[]>>;
 
 	fetchPlayerGameStats: (params: Partial<FetchPlayerStatsParams>, config?: AxiosRequestConfig) => Promise<BallDontLieResponseStructure<PlayerPGStatsModel>>;
 }

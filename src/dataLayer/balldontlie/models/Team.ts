@@ -1,7 +1,8 @@
+import { WithPictureModel } from './WithPicture';
 import { DivisionEnum } from './Division';
 import { ConferenceEnum } from './Conference';
 
-export interface TeamModel {
+export interface TeamModel extends WithPictureModel {
 	id: number;
 	abbreviation: string;
 	city: string;

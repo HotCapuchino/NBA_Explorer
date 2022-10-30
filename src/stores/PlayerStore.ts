@@ -1,12 +1,15 @@
 import { makeObservable, observable, action } from 'mobx';
 import { BasicStore } from './BasicStore';
-import { PlayerRepository, PlayerRepositoryInterface } from 'src/domainLayer/PlayerRepository';
+import { PlayerInfoModel, PlayerInfoParams, PlayerRepository, PlayerRepositoryInterface } from 'src/domainLayer/PlayerRepository';
 import { PlayerModel } from 'src/dataLayer/balldontlie/models/Player';
+import { PlayerSeasonAverageStatsModel } from 'src/dataLayer/balldontlie/models/SeasonAverages';
+import { BallDontLieResponseStructure, FetchPlayerSeasonAveragesParams, FetchPlayerStatsParams } from 'src/dataLayer/balldontlie/types';
+import { PlayerPGStatsModel } from 'src/dataLayer/balldontlie/models/PlayerPGStats';
 
 export class PlayerStore extends BasicStore {
 	repository: PlayerRepositoryInterface = new PlayerRepository();
-	players: PlayerModel[] = [];
-	selectedPlayer: PlayerModel = null;
+	players: BallDontLieResponseStructure<PlayerModel[]> = { data: [], meta: null };
+	selectedPlayer: PlayerInfoModel = null;
 
 	constructor() {
 		super();
@@ -14,25 +17,38 @@ export class PlayerStore extends BasicStore {
 			players: observable,
 			selectedPlayer: observable,
 			fetchPlayers: action,
-			findPlayer: action,
+			getPlayerInfo: action,
+			getSeasonStats: action,
 		});
 	}
 
-	async fetchPlayers(page?: number, search = ''): Promise<PlayerModel[]> {
-		const { data, meta } = await this.repository.getPlayers({ page, per_page: this.entriesPerPage, search });
+	async fetchPlayers(page?: number, search = ''): Promise<void> {
+		const iterator = this.repository.getPlayers({ page, per_page: this.entriesPerPage, search });
 
-		return data;
+		for await (const res of iterator) {
+			this.players = res;
+		}
 	}
 
-	async findPlayer(playerId: number): Promise<PlayerModel> {
-		const chosenPlayer = this.players.find((player) => player.id === playerId);
+	async getPlayerInfo(params: Partial<PlayerInfoParams>): Promise<void> {
+		const iterator = this.repository.getPlayerInfo(params);
 
-		if (chosenPlayer) {
-			this.selectedPlayer = chosenPlayer;
-		} else {
-			this.selectedPlayer = await this.repository.getPlayer(playerId);
+		for await (const res of iterator) {
+			this.selectedPlayer = res;
 		}
+	}
 
-		return this.selectedPlayer;
+	async getSeasonStats(params: Partial<FetchPlayerSeasonAveragesParams>): Promise<PlayerSeasonAverageStatsModel> {
+		const seasonAverages = await this.repository.getSeasonStats(params);
+		this.selectedPlayer.seasonAverages = seasonAverages.length > 0 ? seasonAverages[0] : null;
+
+		return this.selectedPlayer.seasonAverages;
+	}
+
+	async getPlayerGameStats(params: Partial<FetchPlayerStatsParams>): Promise<BallDontLieResponseStructure<PlayerPGStatsModel>> {
+		const pgs = await this.repository.getPlayerGameStats(params);
+		this.selectedPlayer.gameStats = pgs;
+
+		return pgs;
 	}
 }

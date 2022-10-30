@@ -1,0 +1,50 @@
+.MuiPopover-root {
+    .popover-card {
+        @each $division, $color in $usa_map_colors {
+            .MuiCardHeader-root.#{$division} {
+                color: map-get($map: $colors, $key: light1);
+                background-color: $color;
+            }
+        }
+
+        &--team-item {
+            display: flex;
+            align-items: center;
+
+            .team-item {
+                &--info {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    margin-right: 10px;
+
+                    & > *:last-child {
+                        margin-top: 5px;
+                        font-weight: 700;
+                    }
+                }
+
+                &--fullname {
+                    cursor: pointer;
+                }
+            }
+        }
+
+        .MuiCardHeader-root,
+        .MuiCardContent-root {
+            padding: 10px;
+        }
+    }
+}
+
+.us-map-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+    .interactive-map {
+        width: 1200px;
+    }
+}

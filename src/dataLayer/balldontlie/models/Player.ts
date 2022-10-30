@@ -1,6 +1,7 @@
 import { TeamModel } from './Team';
+import { WithPictureModel } from './WithPicture';
 
-export interface PlayerModel {
+export interface PlayerModel extends WithPictureModel {
 	id: number;
 	first_name: string;
 	last_name: string;

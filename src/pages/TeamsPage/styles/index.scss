@@ -1,0 +1,30 @@
+.teams-page {
+    .page-content {
+        .page-view-tabs {
+            display: flex;
+            justify-content: center;
+        }
+    
+        .tabs-content-wrapper {
+            display: flex;
+            flex-grow: 1;
+            justify-content: center;
+    
+            .tabs--tab-panel {
+                width: 100%;
+                display: flex;
+                padding-right: 50px;
+                padding-left: 50px;
+
+                &[hidden] {
+                    display: none;
+                }
+            }
+        }
+    }
+
+    // TODO: global styles for tabPanels?
+
+
+}
+    

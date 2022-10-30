@@ -1,10 +1,11 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import NotFound from 'src/layout/NotFound';
+import GamePage from 'src/pages/GamePages/GamePage';
 import GamesPage from 'src/pages/GamePages/GamesPage';
 import PlayerPage from 'src/pages/PlayerPages/PlayerPage';
 import PlayersPage from 'src/pages/PlayerPages/PlayersPage';
-import TeamsPage from 'src/pages/TeamsPage';
+import TeamsPage from 'src/pages/TeamsPage/TeamsPage';
 import WelcomePage from 'src/pages/WelcomePage';
 import { routes } from './routeObject';
 
@@ -16,6 +17,7 @@ const CustomRouter: React.FC = () => {
             <Route path={routes.players.player} element={<PlayerPage/>}/>
             <Route path={routes.teams.index} element={<TeamsPage/>} />
             <Route path={routes.games.index} element={<GamesPage/>} />
+            <Route path={routes.games.game} element={<GamePage/>}/>
             <Route path="*" element={<NotFound/>}/>
         </Routes>
     );

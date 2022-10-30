@@ -1,10 +1,30 @@
-import { createTheme } from '@mui/system';
+import { createTheme } from '@mui/material/styles';
 
-export const theme = createTheme({
+export const generalTheme = createTheme({
 	components: {
-		MuiTypography: {
+		MuiAppBar: {
 			defaultProps: {
-				component: 'span',
+				sx: {
+					'&.MuiAppBar-root': {
+						display: 'flex',
+						flexDirection: 'row',
+						alignItems: 'center',
+						maxHeight: 50,
+						padding: '0 20px',
+					},
+				},
+			},
+		},
+		MuiAvatar: {
+			defaultProps: {
+				sx: {
+					'&.MuiAvatar-root': {
+						img: {
+							objectFit: 'contain',
+						},
+					},
+				},
+				variant: 'rounded',
 			},
 		},
 	},

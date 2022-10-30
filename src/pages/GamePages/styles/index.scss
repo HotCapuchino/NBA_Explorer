@@ -1,0 +1,81 @@
+.games-table {
+    max-width: 1200px;
+    margin: auto;
+
+    .MuiFormGroup-root {
+        display: flex;
+        flex-direction: row;
+    }
+
+    &--table-row {
+        transition: background-color .5s;
+
+        &:hover {
+            transition: background-color .5s linear;
+            background-color: map-get($map: $colors, $key: light2);
+        }
+    }
+
+    .game-info-wrapper {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        .team-container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            &--score {
+                font-size: 22px;
+                // font-weight: 600;   
+            }
+
+            &--info {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                p {
+                    font-weight: 600;
+                    margin-top: 10px;
+                }
+            }
+
+            &:not(.team-container_reversed) {
+                margin-right: 20px;
+
+                .team-container--info {
+                    margin-right: 10px;
+                }
+            }
+
+            &_reversed {
+                margin-left: 20px;
+
+                .team-container--info {
+                    margin-left: 10px;
+                }
+            }
+
+            @each $status, $color in $game_results_colors {
+                &_#{$status} {
+                    @if $status == loser {
+                        opacity: 0.6;
+                    }
+
+                    color: $color;
+                }
+            }
+        }
+
+        &--divider {
+            width: 100px;
+        }
+    }
+
+    &:first-child {
+        cursor: pointer;
+    }
+
+}

@@ -1,3 +1,6 @@
+import { TeamModel } from './Team';
+import { PlayerModel } from 'src/dataLayer/balldontlie/models/Player';
+import { GameModel } from 'src/dataLayer/balldontlie/models/Game';
 export interface PGStatsModel {
 	// minutes played
 	min: string;
@@ -36,4 +39,7 @@ export interface PGStatsModel {
 	pf: number;
 	// points
 	pts: number;
+	game: GameModel;
+	player: PlayerModel;
+	team: TeamModel;
 }

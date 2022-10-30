@@ -53,8 +53,11 @@ export class TeamStore extends BasicStore {
 		return westTeamsMap;
 	}
 
-	async fetchTeams(): Promise<TeamModel[]> {
-		this.teams = await this.repository.fetchTeams();
-		return this.teams;
+	async fetchTeams(): Promise<void> {
+		const iterator = this.repository.fetchTeams();
+
+		for await (const res of iterator) {
+			this.teams = res;
+		}
 	}
 }

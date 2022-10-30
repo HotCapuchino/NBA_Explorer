@@ -1,3 +1,3 @@
 export interface ImageModel {
-	id: string;
+	original: string;
 }

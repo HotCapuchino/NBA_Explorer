@@ -1,0 +1,28 @@
+.player-position-wrapper {
+    display: flex;
+    flex-direction: row;
+
+    .player-position-block {
+        padding: 5px 12px;
+        font-size: 14px;
+    
+        @each $position, $colors in $player_positions_colors {
+            &.player-position-block_#{$position} {
+                background-color: nth($colors, 1);
+                color: nth($colors, 2);
+            }
+        }
+
+        &:first-child {
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
+        }
+
+        &:last-child {
+            border-top-right-radius: 8px;
+            border-bottom-right-radius: 8px;
+        }
+    }
+}
+
+

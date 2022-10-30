@@ -2,7 +2,7 @@ import { TeamModel } from './Team';
 
 export interface GameModel {
 	id: number;
-	date: string; // mb moment?
+	date: string;
 	home_team: TeamModel;
 	home_team_score: number;
 	period: number;

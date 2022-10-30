@@ -1,4 +1,4 @@
-import { Link, Typography } from '@mui/material';
+import { Box, Link, Typography } from '@mui/material';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -19,10 +19,10 @@ const NotFound: React.FC<NotFoundPageProps> = (props) => {
     const handleGoBack = (): void => navigate(-1);
     
     return (
-        <div className='not-found-container'>
+        <Box className='not-found-container'>
             <Typography>{type ? type : 'Requested page not found'}</Typography>
             <Link component="button" onClick={handleGoBack}>Go Back</Link>
-        </div>
+        </Box>
     );
 }
 

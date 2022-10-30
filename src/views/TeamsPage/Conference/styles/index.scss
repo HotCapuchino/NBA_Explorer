@@ -1,0 +1,59 @@
+.conference-view {
+    padding: 20px;
+    transition:opacity .5s;
+
+    &_expanded {
+        width: 100%;
+    }
+
+    &_shown {
+        width: 50%;
+        opacity: 0.6;
+    }
+
+    &_hidden {
+        display: none;
+    }
+
+    .divisions-table {
+        @each $division, $color in $usa_map_colors {
+            .division-cell_#{$division} {
+                border-left: solid 5px $color;
+            }
+        }
+    }
+
+    &:hover {
+        opacity: 1;
+        transition-duration: .5s;
+    }
+
+    &--map-container {
+        display: flex;
+        align-items: center;
+
+        &_reversed {
+            flex-direction: row-reverse;
+        }
+
+        .conference-view--letter {
+            text-transform: uppercase;
+            margin: 0 30px;
+            cursor: pointer;
+    
+            &_west {
+                color: #ef4e2a;
+            }
+    
+            &_east {
+                color: #4893d5;
+            }
+        }
+
+        .division-block {
+            flex-grow: 1;
+            margin-left: 50px;
+        }
+    }
+
+}

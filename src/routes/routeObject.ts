@@ -7,10 +7,10 @@ export const routes = {
 	},
 	teams: {
 		index: '/teams',
-		// team: 'team/:id',
-		// openTeam: (teamId: number) => `team/${teamId}`,
 	},
 	games: {
 		index: '/games',
+		game: '/game/:id',
+		openGame: (gameId: number) => `/game/${gameId}`,
 	},
 };

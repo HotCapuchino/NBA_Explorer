@@ -1,12 +1,12 @@
 import { makeObservable, observable, action } from 'mobx';
 import { GameModel } from 'src/dataLayer/balldontlie/models/Game';
-import { FetchGamesParams } from 'src/dataLayer/balldontlie/types';
+import { FetchGamesParams, BallDontLieResponseStructure } from 'src/dataLayer/balldontlie/types';
 import { GameRepositoryInterface, GameRepository } from 'src/domainLayer/GameRepository';
 import { BasicStore } from './BasicStore';
 
 export class GameStore extends BasicStore {
 	repository: GameRepositoryInterface = new GameRepository();
-	games: GameModel[] = [];
+	games: BallDontLieResponseStructure<GameModel[]> = { data: [], meta: null };
 	selectedGame: GameModel = null;
 
 	constructor() {
@@ -19,20 +19,21 @@ export class GameStore extends BasicStore {
 		});
 	}
 
-	async fetchGamesByFilters(params: FetchGamesParams): Promise<GameModel[]> {
-		const { data, meta } = await this.repository.fetchGames(params);
-		this.games = data;
+	async fetchGamesByFilters(params: FetchGamesParams): Promise<void> {
+		const iterator = this.repository.fetchGames(params);
 
-		return this.games;
+		for await (const res of iterator) {
+			this.games = res;
+		}
 	}
 
 	async findGame(gameId: number): Promise<GameModel> {
-		const chosenGame = this.games.find((game) => game.id === gameId);
+		const chosenGame = this.games.data.find((game) => game.id === gameId);
 
 		if (chosenGame) {
 			this.selectedGame = chosenGame;
 		} else {
-			this.selectedGame = await this.repository.findGame(gameId);
+			this.selectedGame = (await this.repository.findGame(gameId).next()).value;
 		}
 
 		return this.selectedGame;

@@ -1,12 +1,14 @@
 /* eslint-disable react/prop-types */
 import { isNil } from "lodash";
 import React from "react";
+import { AppStore } from "./AppStore";
 import { GameStore } from "./GameStore";
 import { PlayerStore } from "./PlayerStore";
 import { TeamStore } from "./TeamStore";
 
 class Store {
 
+    appStore: AppStore;
     teamStore: TeamStore;
     playerStore: PlayerStore;
     gameStore: GameStore;
@@ -14,6 +16,7 @@ class Store {
     private static store: Store;
 
     private constructor() {
+        this.appStore = new AppStore();
         this.teamStore = new TeamStore();
         this.playerStore = new PlayerStore();
         this.gameStore = new GameStore();

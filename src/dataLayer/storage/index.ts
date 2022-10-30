@@ -18,22 +18,23 @@ export class StorageAdapter implements LocalStorageInterface {
 		//
 	}
 
-	setData(key: string, data: unknown, rewrite = false): void {
+	setData(key: string, data: unknown, options: { needToBeEncoded?: boolean; rewrite?: boolean }): void {
 		if (!isNil(localStorage.getItem(key)) && !isUndefined(localStorage.getItem(key))) {
-			if (!rewrite) {
+			if (!options?.rewrite) {
 				// throw error
-				console.log('unable to save data with key', key);
+				// console.log('unable to save data with key', key);
 				return;
 			}
 		}
+		const dataToSave = options?.needToBeEncoded ? JSON.stringify(data) : String(data);
 
-		localStorage.setItem(key, JSON.stringify(data));
+		localStorage.setItem(key, dataToSave);
 	}
 
-	getData<T>(key: string): T | null {
+	getData<T>(key: string, needToBeParsed = false): T | string | null {
 		const data = localStorage.getItem(key);
 
-		return data ? (JSON.parse(data) as T) : null;
+		return data ? (needToBeParsed ? (JSON.parse(data) as T) : data) : null;
 	}
 
 	removeData(key?: string): void {
@@ -46,7 +47,7 @@ export class StorageAdapter implements LocalStorageInterface {
 }
 
 export interface LocalStorageInterface {
-	setData: (key: string, data: unknown, rewrite: boolean) => void;
-	getData: <T>(key: string) => T | null;
+	setData: (key: string, data: unknown, options: { needToBeEncoded?: boolean; rewrite?: boolean }) => void;
+	getData: <T>(key: string, needToBeParsed?: boolean) => T | string | null;
 	removeData: (key?: string) => void;
 }

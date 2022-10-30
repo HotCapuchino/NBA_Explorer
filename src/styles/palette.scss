@@ -1,0 +1,26 @@
+$usa_map_colors: (
+    pacific: #ef4e2a,
+    northwest: #ff9138,
+    southwest: #f9d62d,
+    southeast: #2567d2,
+    atlantic: #922eba,
+    central: #9c166b,
+);
+
+$colors: (
+    light1: #fff,
+    light2: #f4f4f4
+);
+
+$game_results_colors: (
+    loser: #c95f5f,
+    winner: #7cb882,
+    draw: #5687c0,
+);
+
+$player_positions_colors: (
+    guard: (#f9d62d #2c2b2b),
+    forward: (#922eba, #fff),
+    center: (#ef4e2a, #fff),
+    noposition: (#2567d2, #fff),
+);
